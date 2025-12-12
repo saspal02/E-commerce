@@ -1,7 +1,9 @@
 package com.ecommerce.service;
 
+import com.ecommerce.exceptions.APIException;
 import com.ecommerce.exceptions.ResourceNotFoundException;
 import com.ecommerce.model.Category;
+import com.ecommerce.payload.CategoryResponse;
 import com.ecommerce.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,14 +17,20 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    public CategoryResponse getAllCategories() {
+        List<Category> categories = categoryRepository.findAll();
+        if (categories.isEmpty())
+            throw new APIException(("No category created till now"));
+        return categories;
     }
 
     @Override
     public void createCategory(Category category) {
-        categoryRepository.save(category);
+        Category savedCategory = categoryRepository.findByCategoryName(category.getCategoryName());
+        if (savedCategory != null)
+            throw new APIException("Category with the name " + category.getCategoryName() + " already exists !!!");
 
+        categoryRepository.save(category);
     }
 
     @Override
@@ -32,7 +40,6 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.delete(category);
         return "Category with categoryId " + categoryId + " deleted successfully";
     }
-
 
     @Override
     public Category updateCategory(Category category, Long categoryId) {

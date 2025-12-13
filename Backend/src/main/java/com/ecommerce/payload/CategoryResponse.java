@@ -1,6 +1,14 @@
 package com.ecommerce.payload;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
-public record CategoryResponse(List<CategoryDTO> content) {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CategoryResponse {
+    private List<CategoryDTO> content;
 }

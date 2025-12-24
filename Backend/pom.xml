@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ecommerce</groupId>
-	<artifactId>Backend</artifactId>
+	<artifactId>ecommerce-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Backend</name>
+	<name>ecommerce-backend</name>
 	<description>E-commerce Project</description>
 	<url/>
 	<licenses>

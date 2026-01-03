@@ -1,24 +1,20 @@
 package com.ecommerce.controller;
 
 import com.ecommerce.payload.AuthenticationResult;
-import com.ecommerce.repositories.UserRepository;
-import com.ecommerce.security.jwt.JwtUtils;
 import com.ecommerce.security.jwt.request.LoginRequest;
 import com.ecommerce.security.jwt.request.SignUpRequest;
 import com.ecommerce.security.jwt.response.MessageResponse;
 import com.ecommerce.service.AuthService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired

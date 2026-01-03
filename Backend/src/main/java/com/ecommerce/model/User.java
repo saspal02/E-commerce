@@ -37,7 +37,7 @@ public class User {
     private String email;
 
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 120)
     @Column(name = "password")
     private String password;
 
@@ -57,6 +57,11 @@ public class User {
                 joinColumns = @JoinColumn(name = "user_id"),
                 inverseJoinColumns = @JoinColumn(name = "address_id"))
     private List<Address> addresses = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.PERSIST,CascadeType.MERGE},
+            orphanRemoval = true)
+    private Cart cart;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "user",

@@ -2,7 +2,6 @@ package com.ecommerce.controller;
 
 import com.ecommerce.payload.CartDTO;
 import com.ecommerce.service.CartService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +27,21 @@ public class CartController {
     public ResponseEntity<List<CartDTO>> getCarts() {
         List<CartDTO> cartDTOS = cartService.getAllCarts();
         return new ResponseEntity<>(cartDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/carts/users/cart")
+    public ResponseEntity<CartDTO> getCartById() {
+        CartDTO cartDTO = cartService.getUserCart();
+        return new ResponseEntity<>(cartDTO, HttpStatus.OK);
+
+    }
+
+    @PutMapping("/carts/products/{productId}/quantity/{operation}")
+    public ResponseEntity<CartDTO> updateCarProduct(@PathVariable Long productId,
+                                                    @PathVariable String operation) {
+        CartDTO cartDTO = cartService.updateProductQuantityInCart(productId,
+                operation.equalsIgnoreCase("delete")? -1 : 1);
+
+        return new ResponseEntity<CartDTO>(cartDTO, HttpStatus.OK);
     }
 }

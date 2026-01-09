@@ -31,26 +31,31 @@ public class Address {
     private String buildingName;
 
     @NotBlank
-    @Size(min = 5, message = "State name must be atleast 5 characters")
-    private String State;
+    @Size(min = 4, message = "City name must be atleast 4 characters")
+    private String city;
+
+    @NotBlank
+    @Size(min = 2, message = "State name must be atleast 5 characters")
+    private String state;
 
     @NotBlank
     @Size(min = 2, message = "Building name must be atleast 5 characters")
     private String country;
 
     @NotBlank
-    @Size(min = 2, message = "Pincode name must be atleast 5 characters")
-    private String pinCode;
+    @Size(min = 5, message = "Pincode name must be atleast 5 characters")
+    private String pincode;
 
-    @ToString.Exclude
-    @ManyToMany(mappedBy = "addresses")
-    private List<User> users = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public Address(String street, String buildingName, String state, String country, String pinCode) {
+    public Address(String street, String buildingName, String city,String state, String country, String pincode) {
         this.street = street;
         this.buildingName = buildingName;
-        this.State = state;
+        this.city = city;
+        this.state = state;
         this.country = country;
-        this.pinCode = pinCode;
+        this.pincode = pincode;
     }
 }

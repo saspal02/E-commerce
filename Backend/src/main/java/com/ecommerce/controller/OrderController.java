@@ -2,6 +2,7 @@ package com.ecommerce.controller;
 
 import com.ecommerce.payload.OrderDTO;
 import com.ecommerce.payload.OrderRequestDTO;
+import com.ecommerce.service.OrderService;
 import com.ecommerce.util.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class OrderController {
     @Autowired
     private AuthUtil authUtil;
 
-    @PostMapping
+    @PostMapping("/order/users/payments/{paymentMethod}")
     public ResponseEntity<OrderDTO> orderProducts(@PathVariable String paymentMethod,
                                                   @RequestBody OrderRequestDTO orderRequestDTO) {
         String emailId = authUtil.loggedInEmail();

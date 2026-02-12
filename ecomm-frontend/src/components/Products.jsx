@@ -1,11 +1,14 @@
 import { FaExclamationTriangle } from "react-icons/fa";
 import ProductCard from "./ProductCard";
 import { useDispatch,useSelector } from "react-redux";
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import { fetchProducts } from "../store/actions";
+import Filter from "./Filter";
+
 const Products = () => {
-    const isLoading = false; 
-    const errorMessage = ""; 
+    const { isLoading, errorMessage } = useSelector(
+        (state) => state.errors
+    ) 
     const { products } = useSelector(
         (state) => state.products
     )
@@ -17,6 +20,7 @@ const Products = () => {
 
     return (
         <div className="lg:px-14 sm:px-8 px-4 py-14 xl:w-[90%] xl:mx-auto">
+            <Filter />
             {isLoading ? (
                 <p>It is loading...</p>
             ) : errorMessage ? (

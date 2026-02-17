@@ -13,17 +13,27 @@ import java.util.UUID;
 public class FileServiceImpl implements FileService {
 
     @Override
-    public String uploadImage(String path, MultipartFile file) throws IOException {
+    public String uploadImage(String path, MultipartFile file, String oldFileName) throws IOException {
         String originalFileName = file.getOriginalFilename();
-        String randomId = UUID.randomUUID().toString();
-        String fileName = randomId.concat(originalFileName.substring(originalFileName.lastIndexOf('.')));
-        String filePath = path + File.separator + fileName;
+
+        if (originalFileName != null && originalFileName.equalsIgnoreCase("placeholder.png")) {
+            return "placeholder.png";
+        }
+
         File folder = new File(path);
-        if (!folder.exists())
-            folder.mkdir();
-        Files.copy(file.getInputStream(), Paths.get(filePath));
+        if (!folder.exists()) folder.mkdir();
+
+        String fileName;
+        if (oldFileName != null && !oldFileName.equals("placeholder.png")) {
+            fileName = oldFileName;
+        } else {
+            String ext = originalFileName.substring(originalFileName.lastIndexOf('.'));
+            fileName = UUID.randomUUID().toString() + ext;
+        }
+
+        Files.copy(file.getInputStream(), Paths.get(path + File.separator + fileName),
+                java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
         return fileName;
     }
-
-
 }

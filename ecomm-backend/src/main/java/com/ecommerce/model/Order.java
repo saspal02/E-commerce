@@ -27,9 +27,7 @@ public class Order {
 
     @OneToMany(
             mappedBy = "order",
-            cascade = { CascadeType.PERSIST, CascadeType.MERGE },
-            orphanRemoval = true
-    )
+            cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDate orderDate;

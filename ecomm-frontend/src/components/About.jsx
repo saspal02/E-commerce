@@ -1,4 +1,5 @@
 import ProductCard from "./shared/ProductCard";
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -22,53 +23,94 @@ const products = [
     productName: "Google Pixel 6",
     description:
       "The Google Pixel 6 boasts cutting-edge AI features, exceptional photo quality, and a stunning display, making it a perfect choice for Android enthusiasts.",
-    price: 599,
     specialPrice: 400,
+    price: 599,
   },
 ];
 
 const About = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-slate-800 text-4xl font-bold text-center mb-12">
-        About Us
-      </h1>
-      <div className="flex flex-col lg:flex-row justify-between items-center gap-8 mb-12">
-        <div className="w-full md:w-1/2 text-center md:text-left">
-          <p className="text-lg mb-4">
-            Welcome to our e-commerce store! We are dedicated to providing the
-            best products and services to our customers. Our mission is to offer
-            a seamless shopping experience while ensuring the highest quality of
-            our offerings.
+    <div className="bg-gray-50">
+      {/* Hero Section */}
+      <div className="bg-custom-gradient py-20 px-4 text-white">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-5xl font-extrabold mb-6 tracking-wide">
+            About Our Store
+          </h1>
+          <p className="text-lg max-w-3xl mx-auto text-gray-200">
+            We deliver premium devices with unmatched quality and customer
+            experience. Innovation, trust, and value drive everything we do.
           </p>
-        </div>
-
-        <div className="w-full md:w-1/2 mb-6 md:mb-0">
-          <img
-            src="https://embarkx.com/sample/placeholder.png"
-            alt="About Us"
-            className="w-full h-auto rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105"
-          ></img>
         </div>
       </div>
 
-      <div className="py-7 space-y-8">
-        <h1 className="text-slate-800 text-4xl font-bold text-center">
-          Our Products
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product, index) => (
-            <ProductCard
-              key={index}
-              image={product.image}
-              productName={product.productName}
-              description={product.description}
-              specialPrice={product.specialPrice}
-              price={product.price}
-              about
+      {/* About Content Section */}
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          {/* Text Content */}
+          <div className="lg:w-1/2 bg-white/60 backdrop-blur-lg p-10 rounded-3xl shadow-xl border border-gray-200">
+            <h2 className="text-3xl font-bold text-slate-800 mb-6">
+              Who We Are
+            </h2>
+            <p className="text-gray-900 leading-relaxed mb-4">
+              Our platform is built to provide a seamless and secure shopping
+              experience. We carefully curate every product to ensure it meets
+              high standards of performance and reliability.
+            </p>
+            <p className="text-gray-900 leading-relaxed">
+              From premium electronics to everyday essentials, we bring
+              innovation closer to you with carefully selected products,
+              competitive pricing, and dependable customer support you can
+              trust.
+            </p>
+          </div>
+
+          {/* Image */}
+          <div className="lg:w-1/2">
+            <img
+              src="https://embarkx.com/sample/placeholder.png"
+              alt="About"
+              className="rounded-3xl shadow-2xl w-full transform transition duration-500 hover:scale-105"
             />
-          ))}
+          </div>
         </div>
+      </div>
+
+      {/* Products Section */}
+      <div className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center text-slate-800 mb-12">
+            Featured Products
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            {products.map((product, index) => (
+              <ProductCard
+                key={index}
+                image={product.image}
+                productName={product.productName}
+                description={product.description}
+                specialPrice={product.specialPrice}
+                price={product.price}
+                about
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-custom-gradient py-16 text-center text-white">
+        <h2 className="text-3xl font-bold mb-4">Ready to Explore?</h2>
+        <p className="text-gray-200 mb-6">
+          Discover premium products designed for performance and style.
+        </p>
+        <Link
+          to="/products"
+          className="bg-white text-slate-800 font-semibold px-8 py-3 rounded-full shadow-lg hover:scale-105 transition inline-block"
+        >
+          Shop Now
+        </Link>
       </div>
     </div>
   );

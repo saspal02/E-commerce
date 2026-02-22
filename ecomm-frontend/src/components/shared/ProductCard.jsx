@@ -56,7 +56,7 @@ const ProductCard = ({
         </h2>
 
         <div className="min-h-20 max-h-20">
-          <p className="text-gray-900 text-sm">
+          <p className="text-gray-900 text-sm leading-relaxed">
             {truncateText(description, 80)}
           </p>
         </div>
@@ -66,15 +66,15 @@ const ProductCard = ({
             {specialPrice ? (
               <div className="flex flex-col">
                 <span className="text-gray-400 line-through">
-                  ${Number(price).toFixed(2)}
+                  ₹{Number(price).toFixed(2)}
                 </span>
                 <span className="text-xl font-bold text-slate-700">
-                  ${Number(specialPrice).toFixed(2)}
+                  ₹{Number(specialPrice).toFixed(2)}
                 </span>
               </div>
             ) : (
               <span className="text-xl font-bold text-slate-700">
-                ${Number(price).toFixed(2)}
+                ₹{Number(price).toFixed(2)}
               </span>
             )}
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import ProductViewModal from "./ProductViewModal";
-import { truncateText } from "../../utils/truncateText";
-import { useDispatch } from "react-redux";
+import truncateText from "../../utils/truncateText";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/actions";
 import toast from "react-hot-toast";
 

@@ -10,7 +10,7 @@ const cartItems = localStorage.getItem("cartItems")
 
 const user = localStorage.getItem("auth")
   ? JSON.parse(localStorage.getItem("auth"))
-  : [];
+  : null;
 
 const initialState = {
   carts: { cart: cartItems },
@@ -24,7 +24,7 @@ export const store = configureStore({
     carts: cartReducer,
     auth: authReducer,
   },
-  preloadedState: {},
+  preloadedState: initialState,
 });
 
 export default store;

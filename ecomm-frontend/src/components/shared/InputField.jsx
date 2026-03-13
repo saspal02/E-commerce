@@ -1,9 +1,10 @@
 const InputField = ({
   label,
   id,
-  type = "text",
+  type,
   errors,
   register,
+  required,
   message,
   className,
   min,
@@ -13,26 +14,47 @@ const InputField = ({
   return (
     <div className="flex flex-col gap-1 w-full">
       <label
-        htmlFor={id}
-        className={
-          className ? className : "font-semibold text-sm text-slate-800"
-        }
+        htmlFor="id"
+        className={`${
+          className ? className : ""
+        } font-semibold text-sm text-slate-800`}
       >
         {label}
       </label>
-
       <input
-        id={id}
         type={type}
-        min={min}
-        defaultValue={value}
+        id={id}
         placeholder={placeholder}
-        {...register(id)}
-        className="border border-slate-300 rounded-md px-3 py-2 outline-none focus:border-blue-500"
+        className={`${
+          className ? className : ""
+        } px-2 py-2 border outline-hidden bg-transparent text-slate-800 rounded-md ${
+          errors[id]?.message ? "border-red-500" : "border-slate-700"
+        }`}
+        {...register(id, {
+          required: { value: required, message },
+          minLength: min
+            ? { value: min, message: `Minimum ${min} character is required` }
+            : null,
+          pattern:
+            type === "email"
+              ? {
+                  value: /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+com+$/,
+                  message: "Invalid email",
+                }
+              : type === "url"
+                ? {
+                    value:
+                      /^(https?:\/\/)?(([a-zA-Z0-9\u00a1-\uffff-]+\.)+[a-zA-Z\u00a1-\uffff]{2,})(:\d{2,5})?(\/[^\s]*)?$/,
+                    message: "Please enter a valid url",
+                  }
+                : null,
+        })}
       />
 
-      {errors?.[id] && (
-        <p className="text-red-500 text-sm">{message || errors[id].message}</p>
+      {errors[id]?.message && (
+        <p className="text-sm font-semibold text-red-600 mt-0">
+          {errors[id]?.message}
+        </p>
       )}
     </div>
   );

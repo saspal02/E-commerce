@@ -1,15 +1,20 @@
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
-import React from "react";
+import React, { use } from "react";
 import { BiUser } from "react-icons/bi";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoExitOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logoutUser } from "../store/actions";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const UserMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -17,7 +22,9 @@ const UserMenu = () => {
     setAnchorEl(null);
   };
 
-  const logOutHandler = () => {};
+  const logOutHandler = () => {
+    dispatch(logoutUser(navigate));
+  };
 
   return (
     <div className="relative z-30">

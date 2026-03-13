@@ -26,6 +26,30 @@ const products = [
     specialPrice: 400,
     price: 599,
   },
+  {
+    image: "https://embarkx.com/sample/placeholder.png",
+    productName: "Dell XPS 13",
+    description:
+      "The Dell XPS 13 offers premium build quality, a nearly bezel-less display, powerful Intel processors, and exceptional portability, making it perfect for professionals and students.",
+    specialPrice: 899,
+    price: 1099,
+  },
+  {
+    image: "https://embarkx.com/sample/placeholder.png",
+    productName: "Kids Smart Learning Tablet",
+    description:
+      "The Kids Smart Learning Tablet features interactive educational apps, parental controls, and a durable kid-friendly design, helping children learn through games, videos, and creative activities.",
+    specialPrice: 79,
+    price: 120,
+  },
+  {
+    image: "https://embarkx.com/sample/placeholder.png",
+    productName: "Samsung Double Door Refrigerator",
+    description:
+      "The Samsung Double Door Refrigerator offers efficient cooling, spacious storage, and energy-saving technology. Its modern design and advanced freshness features keep food preserved for longer.",
+    specialPrice: 749,
+    price: 899,
+  },
 ];
 
 const About = () => {

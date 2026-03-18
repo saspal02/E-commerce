@@ -11,6 +11,7 @@ import Cart from "./components/cart/Cart";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import Register from "./components/auth/Register";
+import Checkout from "./components/checkout/Checkout";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </Router>
       <Toaster position="bottom-center" />

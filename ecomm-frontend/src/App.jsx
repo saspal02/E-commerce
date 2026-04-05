@@ -28,7 +28,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/" element={<PrivateRoute />}>
+            <Route path="/checkout" element={<Checkout />} />
+          </Route>
         </Routes>
       </Router>
       <Toaster position="bottom-center" />

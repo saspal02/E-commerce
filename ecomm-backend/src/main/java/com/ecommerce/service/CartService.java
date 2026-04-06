@@ -1,6 +1,7 @@
 package com.ecommerce.service;
 
 import com.ecommerce.payload.CartDTO;
+import com.ecommerce.payload.CartItemDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -20,4 +21,5 @@ public interface CartService {
 
     void updateProductInCarts(Long cartId, Long productId);
 
+    String createOrUpdateCartWithItems(List<CartItemDTO> cartItems);
 }

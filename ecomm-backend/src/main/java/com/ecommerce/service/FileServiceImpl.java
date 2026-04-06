@@ -13,25 +13,30 @@ import java.util.UUID;
 public class FileServiceImpl implements FileService {
 
     @Override
-    public String uploadImage(String path, MultipartFile file, String oldFileName) throws IOException {
-        String originalFileName = file.getOriginalFilename();
+    public String uploadImage(String path, MultipartFile file) throws IOException {
 
-        if (originalFileName != null && originalFileName.equalsIgnoreCase("placeholder.png")) {
+        if (file == null || file.isEmpty()) {
             return "placeholder.png";
         }
 
-        File folder = new File(path);
-        if (!folder.exists()) folder.mkdir();
+        String originalFileName = file.getOriginalFilename();
 
-        String fileName;
-        if (oldFileName != null && !oldFileName.equals("placeholder.png")) {
-            fileName = oldFileName;
-        } else {
-            String ext = originalFileName.substring(originalFileName.lastIndexOf('.'));
-            fileName = UUID.randomUUID().toString() + ext;
+        if (originalFileName == null) {
+            return "placeholder.png";
         }
 
-        Files.copy(file.getInputStream(), Paths.get(path + File.separator + fileName),
+        int lastDotIndex = originalFileName.lastIndexOf('.');
+        String ext = (lastDotIndex != -1) ? originalFileName.substring(lastDotIndex) : "";
+
+        String fileName = UUID.randomUUID().toString() + ext;
+        String filePath = path + File.separator + fileName;
+
+        File folder = new File(path);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        Files.copy(file.getInputStream(), Paths.get(filePath),
                 java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 
         return fileName;
